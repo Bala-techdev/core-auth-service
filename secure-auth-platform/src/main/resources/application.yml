@@ -1,0 +1,36 @@
+server:
+  port: 8080
+
+spring:
+  # MySQL Database Configuration
+  datasource:
+    url: jdbc:mysql://localhost:3306/secure_auth_db?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: devuser
+    password: Bala2007+  # Change this to your actual MySQL root password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  # Hibernate & JPA Configuration
+  jpa:
+    hibernate:
+      ddl-auto: update      # Automatically creates/updates tables based on your Entity classes
+    show-sql: true          # Prints SQL queries to the console for debugging
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+
+  # Redis Configuration (Make sure your local Redis server is running)
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+# Custom Application Properties
+app:
+  jwt:
+    # A strong 256-bit Base64 encoded secret key (Do not share this in production!)
+    secret: 676334cedfe3bb083433bc2293f96237b2e8e37b24f4b7f22c91428951ba1faa
+    # Access token expires in 15 minutes (900000 milliseconds)
+    access-token-expiration: 900000
+    # Refresh token expires in 7 days (604800000 milliseconds)
+    refresh-token-expiration: 604800000
